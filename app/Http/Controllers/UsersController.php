@@ -1,20 +1,21 @@
 <?php
-/**
- * @author Sam Street
- */
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Entity\User;
+use App\Service\UserService;
+use Illuminate\Http\Request;
 use App\Interfaces\ICRUD;
 
-/**
- * Class UserController
- *
- * @package App\Http\Controllers\API
- */
-class APIUserController extends Controller implements ICRUD
+class UsersController extends Controller implements ICRUD
 {
+
+    private $service;
+
+    function __construct(UserService $service)
+    {
+        $this->service = $service;
+    }
 
     /**
      * @param $data
@@ -29,7 +30,7 @@ class APIUserController extends Controller implements ICRUD
      */
     public function fetch($id)
     {
-        // TODO: Implement fetch() method.
+        $this->service->getUserById($id);
     }
 
     /**

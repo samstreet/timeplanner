@@ -60,7 +60,10 @@ class UserRepository extends BaseRepository implements IRepository
      */
     public function find($id): Entity
     {
-        return new User();
+        $u = new User();
+        $u->setId($id);
+
+        return $u;
     }
 
 

@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="posts")
+ * @ORM\Table(name="user")
  * @ORM\HasLifecycleCallbacks()
  */
 class User extends Entity {
