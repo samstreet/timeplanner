@@ -23,6 +23,11 @@ class User extends Entity {
 	 */
 	private $id;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Assignment", mappedBy="user")
+     */
+    private $features;
+
 	/**
 	 * @return int
 	 */

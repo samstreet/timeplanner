@@ -8,17 +8,21 @@ namespace App\Service;
 
 use App\Repository\UserRepository;
 
-class UserService
+class UserService extends BaseService
 {
 
-    private $repo;
-
-    function __construct( UserRepository $repo)
+    /**
+     * UserService constructor.
+     *
+     * @param \App\Repository\UserRepository $repo
+     */
+    function __construct(UserRepository $repo)
     {
         $this->repo = $repo;
     }
 
-    public function getUserById( $id ){
+    public function getUserById($id)
+    {
         dump($this->repo->find($id));
     }
 
