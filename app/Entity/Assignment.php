@@ -43,7 +43,7 @@ class Assignment extends Entity
     private $title;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="assignments")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;

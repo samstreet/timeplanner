@@ -9,4 +9,3 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/users/{id}', 'UsersController@fetch')->where('id', '[0-9]+');
-

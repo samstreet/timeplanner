@@ -60,10 +60,7 @@ class UserRepository extends BaseRepository implements IRepository
      */
     public function find($id): Entity
     {
-        $u = new User();
-        $u->setId($id);
-
-        return $u;
+        return $this->em->find('App\Entity\User', $id);
     }
 
 
