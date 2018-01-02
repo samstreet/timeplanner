@@ -48,6 +48,14 @@ class Assignment extends Entity
      */
     private $user;
 
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->getId()
+        ];
+    }
+
+
     /**
      * @return int
      */

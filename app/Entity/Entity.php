@@ -5,12 +5,14 @@
 
 namespace App\Entity;
 
+use JsonSerializable;
+
 /**
  * Class Base
  *
  * @package App\Entity
  */
-abstract class Entity
+abstract class Entity implements  JsonSerializable
 {
 
     /**
@@ -19,5 +21,10 @@ abstract class Entity
     function getClass(){
         return self::class;
     }
+
+    /**
+     * @return mixed
+     */
+    abstract function jsonSerialize();
 
 }

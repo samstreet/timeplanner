@@ -92,6 +92,16 @@ class User extends Entity
     }
 
     /**
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+       return [
+           'id' => $this->getId()
+       ];
+    }
+
+    /**
      * @return mixed
      */
     public function getAssignments()

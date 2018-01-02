@@ -21,9 +21,14 @@ class UserService extends BaseService
         $this->repo = $repo;
     }
 
+    /**
+     * @param $id
+     *
+     * @return \App\Entity\User
+     */
     public function getUserById($id)
     {
-        dump($this->repo->find($id));
+        return $this->repo->find($id);
     }
 
 }
