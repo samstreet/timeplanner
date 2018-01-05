@@ -62,4 +62,15 @@ class UserRepository extends BaseRepository implements IRepository
     {
         return $this->em->find('App\Entity\User', $id);
     }
+
+    /**
+     * @param $email
+     *
+     * @return array
+     */
+    public function findByEmail( $email ){
+       return $this->em->getRepository('App\Entity\User')->findBy([
+            'email' => $email
+        ]);
+    }
 }

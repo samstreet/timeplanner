@@ -6,14 +6,16 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use \Illuminate\Contracts\Auth\Authenticatable;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="user")
  * @ORM\HasLifecycleCallbacks()
  */
-class User extends Entity
+class User extends Entity implements Authenticatable
 {
+    use \LaravelDoctrine\ORM\Auth\Authenticatable;
 
     /**
      * @var integer $id
@@ -78,12 +80,6 @@ class User extends Entity
     private $isActive = 1;
 
     /**
-     * @var string
-     * @ORM\Column(name="password", type="string",  nullable=false)
-     */
-    private $password;
-
-    /**
      * @return int
      */
     public function getId(): int
@@ -99,6 +95,11 @@ class User extends Entity
        return [
            'id' => $this->getId()
        ];
+    }
+
+    public function getAuthIdentifierName()
+    {
+        return 'id';
     }
 
     /**
@@ -173,6 +174,85 @@ class User extends Entity
         return $this->isActive;
     }
 
+    /**
+     * @param mixed $assignments
+     */
+    public function setAssignments($assignments)
+    {
+        $this->assignments = $assignments;
+        return $this;
+    }
 
+    /**
+     * @param string $username
+     */
+    public function setUsername(string $username)
+    {
+        $this->username = $username;
+        return $this;
+    }
+
+    /**
+     * @param \DateTime $dob
+     */
+    public function setDob(\DateTime $dob)
+    {
+        $this->dob = $dob;
+        return $this;
+    }
+
+    /**
+     * @param \DateTime $createdDate
+     */
+    public function setCreatedDate(\DateTime $createdDate)
+    {
+        $this->createdDate = $createdDate;
+        return $this;
+    }
+
+    /**
+     * @param \DateTime $expiryDate
+     */
+    public function setExpiryDate(\DateTime $expiryDate)
+    {
+        $this->expiryDate = $expiryDate;
+        return $this;
+    }
+
+    /**
+     * @param string $firstName
+     */
+    public function setFirstName(string $firstName)
+    {
+        $this->firstName = $firstName;
+        return $this;
+    }
+
+    /**
+     * @param string $lastName
+     */
+    public function setLastName(string $lastName)
+    {
+        $this->lastName = $lastName;
+        return $this;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail(string $email)
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * @param string $isActive
+     */
+    public function setIsActive(string $isActive)
+    {
+        $this->isActive = $isActive;
+        return $this;
+    }
 
 }

@@ -6,19 +6,30 @@
 namespace App\Service;
 
 
+use App\Entity\User;
 use App\Repository\UserRepository;
 
 class UserService extends BaseService
 {
 
     /**
-     * UserService constructor.
-     *
-     * @param \App\Repository\UserRepository $repo
+     * @param $data
      */
-    function __construct(UserRepository $repo)
+    public function create($data)
     {
-        $this->repo = $repo;
+        $user = new User();
+        $user->setUsername( 'bilboswaggings' );
+        $user->setFirstName('John');
+        $user->setLastName('Smith');
+        $user->setCreatedDate( (new \DateTime()));
+        $user->setDob((new \DateTime()));
+        $user->setEmail('bilbo@gmail.com');
+        $user->setPassword(bcrypt('secret'));
+
+        $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush();
+
+        return $user;
     }
 
     /**
@@ -29,6 +40,20 @@ class UserService extends BaseService
     public function getUserById($id)
     {
         return $this->repo->find($id);
+    }
+
+    /**
+     * @param $email
+     *
+     * @return null|object
+     */
+    public function findByEmail($email)
+    {
+        return $this->getUserRepository()->findOneBy(
+            [
+                'email' => $email
+            ]
+        );
     }
 
 }

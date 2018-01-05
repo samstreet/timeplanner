@@ -32,4 +32,10 @@ class Family extends Entity
         return $this->id;
     }
 
+    function jsonSerialize()
+    {
+        return [];
+    }
+
+
 }
