@@ -23,3 +23,8 @@ Route::get('/home', [
     'middleware' => 'auth',
     'uses' => 'HomeController@index'
 ]);
+
+Route::get('/dashboard', [
+    'middleware' => 'auth',
+    'uses' => 'HomeController@index'
+]);
