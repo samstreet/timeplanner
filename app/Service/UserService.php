@@ -39,7 +39,7 @@ class UserService extends BaseService
      */
     public function getUserById($id)
     {
-        return $this->repo->find($id);
+        return $this->getEntityManager()->find('App\Entity\User',$id);
     }
 
     /**

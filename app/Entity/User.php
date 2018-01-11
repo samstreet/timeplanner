@@ -5,17 +5,24 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping as ORM;
-use \Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Support\Facades\App;
+use Laravel\Passport\HasApiTokens;
+use LaravelDoctrine\ORM\Auth\Authenticatable;
+use LaravelDoctrine\ORM\Notifications\Notifiable;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="user")
  * @ORM\HasLifecycleCallbacks()
  */
-class User extends Entity implements Authenticatable
+class User extends Entity implements AuthenticatableContract, CanResetPasswordContract
 {
-    use \LaravelDoctrine\ORM\Auth\Authenticatable;
+    use Authenticatable, CanResetPassword, Notifiable, HasApiTokens;
 
     /**
      * @var integer $id
@@ -254,5 +261,7 @@ class User extends Entity implements Authenticatable
         $this->isActive = $isActive;
         return $this;
     }
+
+
 
 }

@@ -177,7 +177,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 	    LaravelDoctrine\ORM\DoctrineServiceProvider::class,
-        LaravelDoctrine\Migrations\MigrationsServiceProvider::class
+        LaravelDoctrine\Migrations\MigrationsServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
+        App\Providers\DoctrineServiceProvider::class,
+
     ],
 
     /*
