@@ -34,6 +34,14 @@ abstract class BaseService
     }
 
     /**
+     * @return \Doctrine\ORM\EntityRepository
+     */
+    public function getAssignmentRepository()
+    {
+        return $this->em->getRepository('App\Entity\Assignment');
+    }
+
+    /**
      * @return \Doctrine\ORM\EntityManager
      */
     public function getEntityManager(): EntityManager
