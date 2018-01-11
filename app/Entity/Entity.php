@@ -20,14 +20,6 @@ abstract class Entity implements JsonSerializable
 {
 
     /**
-     * @return string
-     */
-    function getClass()
-    {
-        return self::class;
-    }
-
-    /**
      * @return mixed
      */
     abstract function jsonSerialize();

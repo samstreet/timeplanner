@@ -179,7 +179,6 @@ return [
 	    LaravelDoctrine\ORM\DoctrineServiceProvider::class,
         LaravelDoctrine\Migrations\MigrationsServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
-        App\Providers\DoctrineServiceProvider::class,
 
     ],
 

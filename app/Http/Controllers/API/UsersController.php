@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Entity\User;
 use App\Service\UserService;
 use Illuminate\Http\Request;
 use App\Interfaces\ICRUD;
+use App\Http\Controllers\Controller;
 
 class UsersController extends Controller implements ICRUD
 {
@@ -27,10 +28,19 @@ class UsersController extends Controller implements ICRUD
 
     /**
      * @param $id
+     *
+     * @return array
      */
     public function fetch($id)
     {
-        $this->service->getUserById($id);
+        $user = $this->service->getUserById($id);
+        if( !is_null($user) ){
+            return $user->jsonSerialize();
+        }
+
+        return [
+            'success' => 'false'
+        ];
     }
 
     /**
