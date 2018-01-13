@@ -20,7 +20,8 @@ use LaravelDoctrine\ORM\Notifications\Notifiable;
  * @ORM\Table(name="user")
  * @ORM\HasLifecycleCallbacks()
  */
-class User extends Entity implements AuthenticatableContract, CanResetPasswordContract
+class User extends Entity
+    implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword, Notifiable, HasApiTokens;
 
@@ -43,6 +44,12 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
      * @ORM\Column(name="username", type="string", unique=true, nullable=false)
      */
     private $username;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Role")
+     * @ORM\JoinColumn(name="role_id", referencedColumnName="id")
+     */
+    private $role;
 
     /**
      * @var \DateTime
@@ -99,9 +106,12 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
      */
     public function jsonSerialize()
     {
-       return [
-           'id' => $this->getId()
-       ];
+        return [
+            'id'        => $this->getId(),
+            'firstName' => $this->getFirstName(),
+            'lastName'  => $this->getLastName(),
+            'email'     => $this->getEmail()
+        ];
     }
 
     public function getAuthIdentifierName()
@@ -187,6 +197,7 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
     public function setAssignments($assignments)
     {
         $this->assignments = $assignments;
+
         return $this;
     }
 
@@ -196,6 +207,7 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
     public function setUsername(string $username)
     {
         $this->username = $username;
+
         return $this;
     }
 
@@ -205,6 +217,7 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
     public function setDob(\DateTime $dob)
     {
         $this->dob = $dob;
+
         return $this;
     }
 
@@ -214,6 +227,7 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
     public function setCreatedDate(\DateTime $createdDate)
     {
         $this->createdDate = $createdDate;
+
         return $this;
     }
 
@@ -223,6 +237,7 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
     public function setExpiryDate(\DateTime $expiryDate)
     {
         $this->expiryDate = $expiryDate;
+
         return $this;
     }
 
@@ -232,6 +247,7 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
     public function setFirstName(string $firstName)
     {
         $this->firstName = $firstName;
+
         return $this;
     }
 
@@ -241,6 +257,7 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
     public function setLastName(string $lastName)
     {
         $this->lastName = $lastName;
+
         return $this;
     }
 
@@ -250,6 +267,7 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
     public function setEmail(string $email)
     {
         $this->email = $email;
+
         return $this;
     }
 
@@ -259,9 +277,9 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
     public function setIsActive(string $isActive)
     {
         $this->isActive = $isActive;
+
         return $this;
     }
-
 
 
 }

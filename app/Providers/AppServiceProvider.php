@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Interfaces\Services\UserServiceInterface;
+use App\Service\UserService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->registerInterfaces();
     }
+
+    private function registerInterfaces(){
+        $this->app->singleton(UserServiceInterface::class, UserService::class);
+    }
+
 }

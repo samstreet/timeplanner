@@ -7,9 +7,10 @@ namespace App\Service;
 
 
 use App\Entity\User;
+use App\Interfaces\Services\UserServiceInterface;
 use App\Repository\UserRepository;
 
-class UserService extends BaseService
+class UserService extends BaseService implements UserServiceInterface
 {
 
     /**
@@ -32,6 +33,22 @@ class UserService extends BaseService
         return $user;
     }
 
+    public function fetch($id)
+    {
+        // TODO: Implement fetch() method.
+    }
+
+    public function update($id, $data)
+    {
+        // TODO: Implement update() method.
+    }
+
+    public function delete($id)
+    {
+        // TODO: Implement delete() method.
+    }
+
+
     /**
      * @param $id
      *
@@ -39,7 +56,14 @@ class UserService extends BaseService
      */
     public function getUserById($id)
     {
-        return $this->getEntityManager()->find('App\Entity\User',$id);
+        return $this->getUserRepository()->find('App\Entity\User',$id);
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllUsers(){
+        return $this->getUserRepository()->findAll();
     }
 
     /**

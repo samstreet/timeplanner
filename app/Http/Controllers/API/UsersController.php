@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Entity\User;
-use App\Service\UserService;
-use Illuminate\Http\Request;
+use App\Interfaces\Services\UserServiceInterface;
 use App\Interfaces\ICRUD;
 use App\Http\Controllers\Controller;
 
 class UsersController extends Controller implements ICRUD
 {
 
+    /**
+     * @var \App\Service\UserService
+     */
     private $service;
 
-    function __construct(UserService $service)
+    function __construct(UserServiceInterface $service)
     {
         $this->service = $service;
     }
@@ -24,6 +25,14 @@ class UsersController extends Controller implements ICRUD
     public function create($data)
     {
         // TODO: Implement create() method.
+    }
+
+    /**
+     * @return array
+     */
+    public function fetchAll()
+    {
+        return $this->service->getAllUsers();
     }
 
     /**
