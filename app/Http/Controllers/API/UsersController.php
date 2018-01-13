@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Interfaces\Services\RoleServiceInterface;
 use App\Interfaces\Services\UserServiceInterface;
 use App\Interfaces\ICRUD;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller implements ICRUD
 {
@@ -12,11 +14,19 @@ class UsersController extends Controller implements ICRUD
     /**
      * @var \App\Service\UserService
      */
-    private $service;
+    private $userService;
 
-    function __construct(UserServiceInterface $service)
-    {
-        $this->service = $service;
+    /**
+     * @var \App\Interfaces\Services\RoleServiceInterface
+     */
+    private $roleService;
+
+    function __construct(
+        UserServiceInterface $userService,
+        RoleServiceInterface $roleService
+    ) {
+        $this->userService = $userService;
+        $this->roleService = $roleService;
     }
 
     /**
@@ -32,7 +42,7 @@ class UsersController extends Controller implements ICRUD
      */
     public function fetchAll()
     {
-        return $this->service->getAllUsers();
+        return $this->userService->getAllUsers();
     }
 
     /**
@@ -42,9 +52,10 @@ class UsersController extends Controller implements ICRUD
      */
     public function fetch($id)
     {
-        $user = $this->service->getUserById($id);
-        if( !is_null($user) ){
-            return $user->jsonSerialize();
+        $roleId = $this->roleService->getRoleByName('admin');
+
+        if ($this->roleService->userHasRole(Auth::user()->getId(), $roleId)) {
+                return Auth::user()->jsonSerialize();
         }
 
         return [

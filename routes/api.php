@@ -17,7 +17,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::delete('users/{id}', 'API\UsersController@delete')->where('id', '[0-9]+');;
 
 
-    Route::get('/assignments', 'API\AssignmentsController@fetch');
+    Route::get('/assignments', 'API\AssignmentsController@fetchAll');
     Route::get('/assignments/{id}', 'API\AssignmentsController@fetch')->where('id', '[0-9]+');
     Route::post('/assignments', 'API\UsersController@create');
     Route::put('/assignments/{id}', 'API\UsersController@update')->where('id', '[0-9]+');

@@ -7,16 +7,29 @@ namespace App\Service;
 
 
 use App\Entity\User;
+use App\Interfaces\Services\AssignmentServiceInterface;
 
-class AssignmentService extends BaseService
+class AssignmentService extends BaseService implements AssignmentServiceInterface
 {
-
-    /**
-     * @param $data
-     */
     public function create($data)
     {
-        return;
+        // TODO: Implement create() method.
     }
+
+    public function fetch($id)
+    {
+        // TODO: Implement fetch() method.
+    }
+
+    public function update($id, $data)
+    {
+        // TODO: Implement update() method.
+    }
+
+    public function delete($id)
+    {
+        // TODO: Implement delete() method.
+    }
+
 
 }
