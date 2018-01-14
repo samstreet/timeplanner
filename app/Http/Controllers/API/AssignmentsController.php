@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Interfaces\Services\AssignmentServiceInterface;
 use App\Interfaces\ICRUD;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AssignmentsController extends Controller implements ICRUD
@@ -30,7 +31,7 @@ class AssignmentsController extends Controller implements ICRUD
      *
      * @return array
      */
-    public function fetch($id)
+    public function fetch(Request $request)
     {
       return [];
     }

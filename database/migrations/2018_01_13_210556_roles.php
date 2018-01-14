@@ -18,6 +18,7 @@ class Roles extends Migration
         DB::statement("ALTER TABLE user ADD role_id INT DEFAULT NULL");
         DB::statement("ALTER TABLE user ADD CONSTRAINT FK_8D93D649D60322AC FOREIGN KEY (role_id) REFERENCES role (id)");
         DB::statement("CREATE UNIQUE INDEX UNIQ_8D93D649D60322AC ON user (role_id)");
+        DB::statement("ALTER TABLE user DROP INDEX UNIQ_8D93D649D60322AC, ADD INDEX IDX_8D93D649D60322AC (role_id)");
     }
 
     /**

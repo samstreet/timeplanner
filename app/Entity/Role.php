@@ -36,6 +36,12 @@ class Role extends Entity
      */
     private $access;
 
+    /**
+     * @var \App\Entity\User
+     * @ORM\OneToMany(targetEntity="User", mappedBy="role")
+     */
+    private $user;
+
     public function jsonSerialize()
     {
         return [
@@ -67,5 +73,12 @@ class Role extends Entity
         return $this->access;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 
 }

@@ -7,6 +7,7 @@ use App\Interfaces\Services\UserServiceInterface;
 use App\Interfaces\ICRUD;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class UsersController extends Controller implements ICRUD
 {
@@ -46,20 +47,23 @@ class UsersController extends Controller implements ICRUD
     }
 
     /**
-     * @param $id
+     * @param \Illuminate\Http\Request $request
      *
      * @return array
      */
-    public function fetch($id)
+    public function fetch(Request $request)
     {
-        $roleId = $this->roleService->getRoleByName('admin');
+        $roleId = $this->roleService->getRoleByName('admin')->getId();
 
-        if ($this->roleService->userHasRole(Auth::user()->getId(), $roleId)) {
-                return Auth::user()->jsonSerialize();
+        if ($request->id == $request->user()->getId()) {
+            return $this->userService->getUserById($request->id)->jsonSerialize();
+        } else if ($this->roleService->userHasRole($request->user()->getId(), $roleId)) {
+            return $this->userService->getUserById($request->id)->jsonSerialize();
         }
 
         return [
-            'success' => 'false'
+            'success' => 'false',
+            'message' => 'Unable to find user'
         ];
     }
 

@@ -2,6 +2,8 @@
 
 namespace App\Interfaces;
 
+use Illuminate\Http\Request;
+
 /**
  * Interface ICRUD
  *
@@ -12,7 +14,7 @@ interface ICRUD
 
     public function create($data);
 
-    public function fetch($id);
+    public function fetch(Request $request);
 
     public function update($id, $data);
 

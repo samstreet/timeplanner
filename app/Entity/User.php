@@ -5,6 +5,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping as ORM;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -24,6 +25,12 @@ class User extends Entity
     implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword, Notifiable, HasApiTokens;
+
+    function __construct()
+    {
+        $this->assignments = new ArrayCollection();
+        $this->role = new ArrayCollection();
+    }
 
     /**
      * @var integer $id
@@ -46,7 +53,7 @@ class User extends Entity
     private $username;
 
     /**
-     * @ORM\OneToOne(targetEntity="Role")
+     * @ORM\ManyToOne(targetEntity="Role")
      * @ORM\JoinColumn(name="role_id", referencedColumnName="id")
      */
     private $role;
@@ -273,6 +280,8 @@ class User extends Entity
 
     /**
      * @param string $isActive
+     *
+     * @return $this
      */
     public function setIsActive(string $isActive)
     {
@@ -280,6 +289,16 @@ class User extends Entity
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+
 
 
 }

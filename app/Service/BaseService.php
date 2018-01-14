@@ -42,6 +42,14 @@ abstract class BaseService
     }
 
     /**
+     * @return \Doctrine\ORM\EntityRepository
+     */
+    public function getRoleRepository()
+    {
+        return $this->em->getRepository('App\Entity\Role');
+    }
+
+    /**
      * @return \Doctrine\ORM\EntityManager
      */
     public function getEntityManager(): EntityManager

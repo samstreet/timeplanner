@@ -56,7 +56,7 @@ class UserService extends BaseService implements UserServiceInterface
      */
     public function getUserById($id)
     {
-        return $this->getUserRepository()->find('App\Entity\User',$id);
+        return $this->getUserRepository()->find($id);
     }
 
     /**
