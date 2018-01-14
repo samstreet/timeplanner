@@ -6,7 +6,7 @@ use App\Interfaces\Services\RoleServiceInterface;
 use App\Interfaces\Services\UserServiceInterface;
 use App\Interfaces\ICRUD;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller implements ICRUD
@@ -41,9 +41,18 @@ class UsersController extends Controller implements ICRUD
     /**
      * @return array
      */
-    public function fetchAll()
+    public function fetchAll(Request $request)
     {
-        return $this->userService->getAllUsers();
+        $roleId = $this->roleService->getRoleByName('admin')->getId();
+
+        if ($this->roleService->userHasRole($request->user()->getId(), $roleId)) {
+            return response($this->userService->getAllUsers(), Response::HTTP_OK)->header('Content-Type', 'application/json');
+        }
+
+        return response([
+            'success' => false,
+            'message' => 'Insufficient permissions'
+        ], Response::HTTP_FORBIDDEN)->header('Content-Type', 'application/json');
     }
 
     /**
@@ -56,15 +65,15 @@ class UsersController extends Controller implements ICRUD
         $roleId = $this->roleService->getRoleByName('admin')->getId();
 
         if ($request->id == $request->user()->getId()) {
-            return $this->userService->getUserById($request->id)->jsonSerialize();
+            return response($this->userService->getUserById($request->id)->jsonSerialize(), Response::HTTP_OK);
         } else if ($this->roleService->userHasRole($request->user()->getId(), $roleId)) {
-            return $this->userService->getUserById($request->id)->jsonSerialize();
+            return response($this->userService->getUserById($request->id)->jsonSerialize(), Response::HTTP_OK);
         }
 
-        return [
-            'success' => 'false',
-            'message' => 'Unable to find user'
-        ];
+        return response([
+            'success' => false,
+            'message' => 'User not found'
+        ], Response::HTTP_NOT_FOUND)->header('Content-Type', 'application/json');
     }
 
     /**
