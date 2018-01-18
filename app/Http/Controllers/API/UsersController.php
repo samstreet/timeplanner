@@ -33,7 +33,7 @@ class UsersController extends Controller implements ICRUD
     /**
      * @param $data
      */
-    public function create($data)
+    public function create(Request $request)
     {
         // TODO: Implement create() method.
     }
@@ -49,10 +49,12 @@ class UsersController extends Controller implements ICRUD
             return response($this->userService->getAllUsers(), Response::HTTP_OK)->header('Content-Type', 'application/json');
         }
 
-        return response([
-            'success' => false,
-            'message' => 'Insufficient permissions'
-        ], Response::HTTP_FORBIDDEN)->header('Content-Type', 'application/json');
+        return response(
+            [
+                'success' => false,
+                'message' => 'Insufficient permissions'
+            ], Response::HTTP_FORBIDDEN
+        )->header('Content-Type', 'application/json');
     }
 
     /**
@@ -70,17 +72,19 @@ class UsersController extends Controller implements ICRUD
             return response($this->userService->getUserById($request->id)->jsonSerialize(), Response::HTTP_OK);
         }
 
-        return response([
-            'success' => false,
-            'message' => 'User not found'
-        ], Response::HTTP_NOT_FOUND)->header('Content-Type', 'application/json');
+        return response(
+            [
+                'success' => false,
+                'message' => 'User not found'
+            ], Response::HTTP_NOT_FOUND
+        )->header('Content-Type', 'application/json');
     }
 
     /**
      * @param $id
      * @param $data
      */
-    public function update($id, $data)
+    public function update(Request $request)
     {
         // TODO: Implement update() method.
     }
@@ -88,9 +92,20 @@ class UsersController extends Controller implements ICRUD
     /**
      * @param $id
      */
-    public function delete($id)
+    public function delete(Request $request)
     {
-        // TODO: Implement delete() method.
+        $roleId = $this->roleService->getRoleByName('admin')->getId();
+
+        if ($this->roleService->userHasRole($request->user()->getId(), $roleId)) {
+            return response($this->userService->delete($request->id), Response::HTTP_OK);
+        }
+
+        return response(
+            [
+                'success' => false,
+                'message' => 'Insufficient permissions'
+            ], Response::HTTP_FORBIDDEN
+        )->header('Content-Type', 'application/json');
     }
 
 }

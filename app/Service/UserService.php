@@ -45,7 +45,24 @@ class UserService extends BaseService implements UserServiceInterface
 
     public function delete($id)
     {
-        // TODO: Implement delete() method.
+        $user = $this->getUserRepository()->findOneBy(
+            [
+                'id' => $id
+            ]
+        );
+
+        if( $user ){
+            $this->getEntityManager()->remove($user);
+            $this->getEntityManager()->flush( $user );
+
+            return [
+                'success' => true
+            ];
+        }
+
+        return [
+            'success' => false
+        ];
     }
 
 

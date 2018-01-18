@@ -12,12 +12,12 @@ use Illuminate\Http\Request;
 interface ICRUD
 {
 
-    public function create($data);
+    public function create(Request $request);
 
     public function fetch(Request $request);
 
-    public function update($id, $data);
+    public function update(Request $request);
 
-    public function delete($id);
+    public function delete(Request $request);
 
 }
