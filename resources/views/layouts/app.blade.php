@@ -29,7 +29,8 @@
 <nav class="navbar navbar-light bg-light static-top">
     <div class="container">
         <a class="navbar-brand" href="#">Start Bootstrap</a>
-        <a class="btn btn-primary" href="#">Sign In</a>
+        <a class="btn btn-primary" href="/login">Sign In</a>
+        <a class="btn btn-secondary" href="/register">Sign Up</a>
     </div>
 </nav>
 
