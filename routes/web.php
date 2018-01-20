@@ -17,7 +17,4 @@ Auth::routes();
 
 Route::get('/logout', 'Auth\LoginController@logout');
 
-Route::get('/dashboard', [
-    'middleware' => 'auth',
-    'uses' => 'HomeController@index'
-]);
+Route::get('/dashboard', 'DashboardController@index')->middleware('auth');

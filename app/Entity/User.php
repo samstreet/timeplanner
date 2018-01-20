@@ -299,6 +299,8 @@ class User extends Entity
     }
 
 
-
+    public function getKey(){
+        return 'key';
+    }
 
 }

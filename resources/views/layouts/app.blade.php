@@ -28,9 +28,13 @@
 <!-- Navigation -->
 <nav class="navbar navbar-light bg-light static-top">
     <div class="container">
-        <a class="navbar-brand" href="#">Start Bootstrap</a>
-        <a class="btn btn-primary" href="/login">Sign In</a>
-        <a class="btn btn-secondary" href="/register">Sign Up</a>
+        <a class="navbar-brand" href="#">Timeplanner</a>
+        <?php if (Auth::check()) { ?>
+            <a class="btn btn-primary" href="/logout">Logout</a>
+        <?php } else { ?>
+            <a class="btn btn-primary" href="/login">Sign In</a>
+            <a class="btn btn-secondary" href="/register">Sign Up</a>
+        <?php }?>
     </div>
 </nav>
 
