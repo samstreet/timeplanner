@@ -26,7 +26,7 @@ abstract class BaseService
     }
 
     /**
-     * @return \Doctrine\ORM\EntityRepository
+     * @return \App\Entity\User
      */
     public function getUserRepository()
     {
@@ -34,7 +34,7 @@ abstract class BaseService
     }
 
     /**
-     * @return \Doctrine\ORM\EntityRepository
+     * @return \App\Entity\Assignment
      */
     public function getAssignmentRepository()
     {
@@ -42,11 +42,19 @@ abstract class BaseService
     }
 
     /**
-     * @return \Doctrine\ORM\EntityRepository
+     * @return \App\Entity\Role
      */
     public function getRoleRepository()
     {
         return $this->em->getRepository('App\Entity\Role');
+    }
+
+    /**
+     * @return \App\Entity\Task
+     */
+    public function getTaskRepository()
+    {
+        return $this->em->getRepository('App\Entity\Task');
     }
 
     /**

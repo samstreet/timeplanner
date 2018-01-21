@@ -30,6 +30,7 @@ class User extends Entity
     {
         $this->assignments = new ArrayCollection();
         $this->role = new ArrayCollection();
+        $this->tasks = new ArrayCollection();
     }
 
     /**
@@ -47,13 +48,18 @@ class User extends Entity
     private $assignments;
 
     /**
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="user")
+     */
+    private $tasks;
+
+    /**
      * @var string
      * @ORM\Column(name="username", type="string", unique=true, nullable=false)
      */
     private $username;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Role")
+     * @ORM\ManyToOne(targetEntity="Role", inversedBy="user")
      * @ORM\JoinColumn(name="role_id", referencedColumnName="id")
      */
     private $role;
@@ -301,6 +307,14 @@ class User extends Entity
 
     public function getKey(){
         return 'key';
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTasks()
+    {
+        return $this->tasks;
     }
 
 }
