@@ -22,5 +22,11 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::post('/assignments', 'API\UsersController@create');
     Route::put('/assignments/{id}', 'API\UsersController@update')->where('id', '[0-9]+');
     Route::delete('assignments/{id}', 'API\UsersController@delete')->where('id', '[0-9]+');
+
+    Route::get('/to-do', 'API\ToDosController@fetchAll');
+    Route::get('/to-do/{id}', 'API\ToDosController@fetch')->where('id', '[0-9]+');
+    Route::post('/to-do', 'API\ToDosController@create');
+    Route::put('/to-do/{id}', 'API\ToDosController@update')->where('id', '[0-9]+');
+    Route::delete('to-do/{id}', 'API\ToDosController@delete')->where('id', '[0-9]+');
 });
 

@@ -9,6 +9,8 @@ use App\Service\RoleService;
 use Illuminate\Support\ServiceProvider;
 use App\Interfaces\Services\UserServiceInterface;
 use App\Service\UserService;
+use App\Service\StatisticsService;
+use App\Interfaces\Services\StatisticsServiceInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -36,6 +38,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(UserServiceInterface::class, UserService::class);
         $this->app->singleton(AssignmentServiceInterface::class, AssignmentService::class);
         $this->app->singleton(RoleServiceInterface::class, RoleService::class);
+        $this->app->singleton(StatisticsServiceInterface::class, StatisticsService::class);
     }
 
 }

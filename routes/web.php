@@ -17,4 +17,8 @@ Auth::routes();
 
 Route::get('/logout', 'Auth\LoginController@logout');
 
-Route::get('/dashboard', 'DashboardController@index')->middleware('auth');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/dashboard', 'DashboardController@index');
+    Route::get('/to-do', 'ToDoController@index');
+    Route::get('/statistics', 'StatisticsController@index');
+});

@@ -18,6 +18,11 @@ class AssignmentsController extends Controller implements ICRUD
         $this->service = $service;
     }
 
+    public function fetchAll( Request $request )
+    {
+        // TODO: Implement fetchAll() method.
+    }
+
     public function create(Request $request)
     {
         // TODO: Implement create() method.
