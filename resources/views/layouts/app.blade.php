@@ -14,12 +14,12 @@
     <link href="/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
-    <link href="assets//font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="assets//simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+    <link href="/assets//font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/assets//simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
     <link href="https:/fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
-    <link href="css/landing-page.css" rel="stylesheet">
+    <link href="/css/landing-page.css" rel="stylesheet">
 
 </head>
 
@@ -87,9 +87,9 @@
 </footer>
 
 <!-- Bootstrap core JavaScript -->
-<script src="assets/jquery/jquery.min.js"></script>
-<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+<script src="/assets/jquery/jquery.min.js"></script>
+<script src="/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/js/Base.js"></script>
 </body>
 
 </html>

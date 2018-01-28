@@ -11,14 +11,13 @@
 |
 */
 
-Route::get('/',  'HomeController@index');
-
+Route::get( '/', 'HomeController@index' );
+Route::get( '/logout', 'Auth\LoginController@logout' );
 Auth::routes();
 
-Route::get('/logout', 'Auth\LoginController@logout');
-
-Route::group(['middleware' => ['auth']], function () {
-    Route::get('/dashboard', 'DashboardController@index');
-    Route::get('/to-do', 'ToDoController@index');
-    Route::get('/statistics', 'StatisticsController@index');
-});
+Route::group(  [ 'middleware' => [ 'auth' ] ], function () {
+    Route::get( '/user/dashboard', 'DashboardController@index' );
+    Route::get( '/user/to-do', 'ToDoController@index' )->name( 'user-todo' );
+    Route::get( '/user/tasks', 'TaskController@index' )->name( 'user-tasks' );
+    Route::get( '/user/statistics', 'StatisticsController@index' )->name( 'user-stats' );
+} );
